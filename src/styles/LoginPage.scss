@@ -1,0 +1,26 @@
+/* src/styles/LoginPage.scss */
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f3f4f6;
+
+    &__form {
+        width: 100%;
+        max-width: 24rem;
+        background: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+    }
+
+    &__heading {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    /* ...and so on for your labels, inputs, buttons, etc. */
+}
