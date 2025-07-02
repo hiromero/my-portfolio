@@ -6,10 +6,6 @@ import LoginPage from './pages/LoginPage';
 function App() {
   return (
     <BrowserRouter>
-      <nav className="p-4 bg-gray-200">
-        <Link to="/" className="mr-4">Home</Link>
-        <Link to="/login">Owner Login</Link>
-      </nav>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />

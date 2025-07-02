@@ -1,26 +1,96 @@
-/* src/styles/LoginPage.scss */
+// src/styles/_LoginPage.scss
 .login-page {
+    // GitHub dark backgrounds
+    background-color: #0d1117;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f3f4f6;
+    color: #c9d1d9; // GitHub light text
 
     &__form {
+        background-color: #161b22;
+        border: 1px solid #30363d;
+        border-radius: 6px;
+        padding: 2rem;
         width: 100%;
-        max-width: 24rem;
-        background: white;
-        border-radius: 0.5rem;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        padding: 1.5rem;
+        max-width: 360px;
+        box-shadow: 0 8px 24px rgba(1, 4, 9, 0.85);
     }
 
     &__heading {
-        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        font-size: 1.75rem;
         font-weight: 600;
-        margin-bottom: 1rem;
         text-align: center;
+        color: #c9d1d9;
     }
 
-    /* ...and so on for your labels, inputs, buttons, etc. */
+    &__field {
+        margin-bottom: 1.25rem;
+
+        &-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            color: #8b949e;
+        }
+
+        &-input {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            background-color: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #c9d1d9;
+            font-size: 1rem;
+
+            &:focus {
+                outline: none;
+                box-shadow: 0 0 0 3px rgba(56, 139, 253, 0.4);
+            }
+        }
+    }
+
+    &__button {
+        width: 100%;
+        padding: 0.6rem;
+        background-color: #238636; // green GitHub success
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: 600;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+            background-color: #2ea043;
+        }
+    }
+
+    &__guest {
+        margin-top: 1rem;
+        text-align: center;
+        font-size: 0.875rem;
+
+        a {
+            color: #58a6ff;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    // Error message
+    &__error {
+        background-color: #78191f;
+        color: #ffdddd;
+        padding: 0.75rem;
+        border-radius: 6px;
+        margin-bottom: 1rem;
+        font-size: 0.875rem;
+    }
 }
