@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import '../styles/DetailsPage.scss';
 
 export default function DetailsPage() {
     const [form, setForm] = useState({
@@ -41,33 +42,43 @@ export default function DetailsPage() {
     };
 
     return (
-        <div className="details-form" style={{ padding: '2rem' }}>
-            <h2>My Details</h2>
-            <form onSubmit={handleSubmit}>
-                {Object.entries(form).map(([key, val]) => (
-                    <div key={key} style={{ marginBottom: '1rem' }}>
-                        <label>{key.charAt(0).toUpperCase() + key.slice(1)}:</label><br />
-                        {key === 'bio' ? (
-                            <textarea
-                                name={key}
-                                value={val}
-                                onChange={handleChange}
-                                rows="3"
-                                style={{ width: '100%' }}
-                            />
-                        ) : (
-                            <input
-                                type="text"
-                                name={key}
-                                value={val}
-                                onChange={handleChange}
-                                style={{ width: '100%' }}
-                            />
-                        )}
-                    </div>
-                ))}
-                <button type="submit">Save</button>
-            </form>
+        <div className="details-page">
+            <div className="details-page__container">
+                <h2 className="details-page__heading">My Details</h2>
+                <form onSubmit={handleSubmit}>
+                    {Object.entries(form).map(([key, val]) => (
+                        <div key={key} className="details-page__field">
+                            <label
+                                htmlFor={key}
+                                className="details-page__field-label"
+                            >
+                                {key.charAt(0).toUpperCase() + key.slice(1)}
+                            </label>
+                            {key === 'bio' ? (
+                                <textarea
+                                    id={key}
+                                    name={key}
+                                    value={val}
+                                    onChange={handleChange}
+                                    className="details-page__field-textarea"
+                                />
+                            ) : (
+                                <input
+                                    type="text"
+                                    id={key}
+                                    name={key}
+                                    value={val}
+                                    onChange={handleChange}
+                                    className="details-page__field-input"
+                                />
+                            )}
+                        </div>
+                    ))}
+                    <button type="submit" className="details-page__button">
+                        Save
+                    </button>
+                </form>
+            </div>
         </div>
     );
 }
