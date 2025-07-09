@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/DetailsPage.scss';
 
 export default function DetailsPage() {
@@ -14,6 +15,7 @@ export default function DetailsPage() {
     });
 
     const token = localStorage.getItem('authToken');
+    const navigate = useNavigate();
 
     // 🧠 Load existing details
     useEffect(() => {
@@ -35,7 +37,7 @@ export default function DetailsPage() {
                     'Content-Type': 'application/json',
                 }
             });
-            alert('Details saved successfully!');
+            navigate('/owner/dashboard');
         } catch (err) {
             alert('Error saving details.');
         }
