@@ -69,6 +69,12 @@ export default function OwnerDashboard() {
                 <ul style={{ listStyle: 'none', padding: 0 }}>
                     <li><Link to="/owner/details" style={{ color: '#58a6ff' }}>Edit My Details</Link></li>
                     {/* other links… */}
+                    <li><Link to="/owner/contacts" style={{ color: '#58a6ff' }}>Contact Addresses</Link></li>
+                    <li><Link to="/owner/experience" style={{ color: '#58a6ff' }}>Work Experiences</Link></li>
+                    <li><Link to="/owner/education" style={{ color: '#58a6ff' }}>Educational Level</Link></li>
+                    <li><Link to="/owner/skills" style={{ color: '#58a6ff' }}>Skills</Link></li>
+                    <li><Link to="/owner/achievements" style={{ color: '#58a6ff' }}>Achievements</Link></li>
+                    <li><Link to="/owner/certifications" style={{ color: '#58a6ff' }}>Certifications</Link></li>
                 </ul>
             </nav>
 
