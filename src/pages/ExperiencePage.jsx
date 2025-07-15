@@ -15,6 +15,7 @@ export default function ExperiencePage() {
         role: '',
         location: '',
         description: '',
+        achievements: '',
         startMonth: 'Jan',
         startYear: new Date().getFullYear().toString(),
         endMonth: 'Dec',
@@ -40,6 +41,7 @@ export default function ExperiencePage() {
             role: '',
             location: '',
             description: '',
+            achievements: '',
             startMonth: 'Jan',
             startYear: new Date().getFullYear().toString(),
             endMonth: 'Dec',
@@ -203,6 +205,20 @@ export default function ExperiencePage() {
                         </div>
                     </div>
 
+                    <div className="experience-page__field">
+                        <label className="experience-page__field-label">
+                            Work Portfolio &amp; Achievements
+                        </label>
+                        <textarea
+                            name="achievements"
+                            value={form.achievements}
+                            onChange={handleChange}
+                            placeholder="One achievement per line"
+                            className="experience-page__field-textarea"
+                            rows={4}
+                        />
+                    </div>
+
                     <button type="submit" className="experience-page__button">
                         {editing ? 'Update' : 'Add'}
                     </button>
@@ -223,6 +239,20 @@ export default function ExperiencePage() {
                             </p>
                             {exp.location && <p><em>{exp.location}</em></p>}
                             {exp.description && <p>{exp.description}</p>}
+
+                            {exp.achievements && (
+                                <ul style={{ marginTop: '0.5rem', paddingLeft: '1.25rem' }}>
+                                    {exp.achievements
+                                        .split('\n')
+                                        .map(line => line.trim())
+                                        .filter(line => line.length > 0)
+                                        .map((line, i) => (
+                                            <li key={i} style={{ marginBottom: '0.25rem' }}>
+                                                {line}
+                                            </li>
+                                        ))}
+                                </ul>
+                            )}
                         </li>
                     ))}
                 </ul>
