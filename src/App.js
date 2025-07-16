@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
 import DetailsPage from './pages/DetailsPage';
+import EducationPage from './pages/EducationPage';
 import ExperiencePage from './pages/ExperiencePage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
@@ -32,6 +33,14 @@ function App() {
           element={
             <ProtectedRoute>
               <ExperiencePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/owner/education"
+          element={
+            <ProtectedRoute>
+              <EducationPage />
             </ProtectedRoute>
           }
         />

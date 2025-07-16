@@ -10,7 +10,6 @@ export default function OwnerDashboard() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Details
         axios.get('http://localhost:5000/api/details')
             .then(res => {
                 if (Object.keys(res.data).length > 0) {
@@ -19,7 +18,6 @@ export default function OwnerDashboard() {
             })
             .catch(() => { });
 
-        // Work Experiences
         axios.get('http://localhost:5000/api/experience', {
             headers: { Authorization: `Bearer ${token}` }
         })
@@ -44,7 +42,27 @@ export default function OwnerDashboard() {
                 Owner Dashboard
             </h1>
 
-            {/* My Details */}
+            {/* ─── My Details Section ──────────────────────────────────── */}
+            <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginBottom: '0.5rem'
+            }}>
+                <h2 style={{ margin: 0 }}>My Details</h2>
+                <Link
+                    to="/owner/details"
+                    style={{
+                        background: '#238636',
+                        color: 'white',
+                        padding: '0.5rem 1rem',
+                        borderRadius: '6px',
+                        textDecoration: 'none'
+                    }}
+                >
+                    Edit
+                </Link>
+            </div>
             {details ? (
                 <div style={{
                     background: '#161b22',
@@ -53,8 +71,7 @@ export default function OwnerDashboard() {
                     padding: '1.5rem',
                     marginBottom: '2rem'
                 }}>
-                    <h2 style={{ marginBottom: '.5rem' }}>My Details</h2>
-                    <ul style={{ listStyle: 'none', padding: 0, lineHeight: 1.6 }}>
+                    <ul style={{ listStyle: 'none', padding: 0, lineHeight: 1.6, margin: 0 }}>
                         {Object.entries(details).map(([key, val]) => (
                             <li key={key}>
                                 <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
@@ -64,14 +81,35 @@ export default function OwnerDashboard() {
                     </ul>
                 </div>
             ) : (
-                <p style={{ color: '#8b949e' }}>
-                    You haven’t added your details yet.&nbsp;
-                    <Link to="/owner/details" style={{ color: '#58a6ff' }}>Add now</Link>
+                <p style={{ color: '#8b949e', marginBottom: '2rem' }}>
+                    No details yet.{' '}
+                    <Link to="/owner/details" style={{ color: '#58a6ff' }}>
+                        Add now
+                    </Link>
                 </p>
             )}
 
-            {/* Work Experiences */}
-            <h2 style={{ margin: '2rem 0 1rem' }}>Work Experiences</h2>
+            {/* ─── Work Experiences Section ────────────────────────────── */}
+            <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginBottom: '0.5rem'
+            }}>
+                <h2 style={{ margin: 0 }}>Work Experiences</h2>
+                <Link
+                    to="/owner/experience"
+                    style={{
+                        background: '#238636',
+                        color: 'white',
+                        padding: '0.5rem 1rem',
+                        borderRadius: '6px',
+                        textDecoration: 'none'
+                    }}
+                >
+                    Edit
+                </Link>
+            </div>
             {experiences.length > 0 ? (
                 experiences.map(exp => (
                     <div
@@ -84,23 +122,14 @@ export default function OwnerDashboard() {
                             marginBottom: '1rem'
                         }}
                     >
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <strong style={{ fontSize: '1.1rem' }}>
-                                {exp.role} @ {exp.company}
-                            </strong>
-                            <span>
-                                <Link to="/owner/experience" style={{ color: '#58a6ff', marginRight: '1rem' }}>Edit</Link>
-                                <Link to="/owner/experience" style={{ color: '#f85149' }}>Delete</Link>
-                            </span>
-                        </div>
-
+                        <strong style={{ fontSize: '1.1rem' }}>
+                            {exp.role} @ {exp.company}
+                        </strong>
                         <p style={{ fontStyle: 'italic', margin: '.5rem 0' }}>
                             {exp.startMonth} {exp.startYear} — {exp.current ? 'Present' : `${exp.endMonth} ${exp.endYear}`}
                         </p>
-
                         {exp.location && <p><em>{exp.location}</em></p>}
                         {exp.description && <p>{exp.description}</p>}
-
                         {exp.achievements && (
                             <ul style={{ paddingLeft: '1.25rem', marginTop: '.5rem' }}>
                                 {exp.achievements
@@ -118,12 +147,21 @@ export default function OwnerDashboard() {
                 ))
             ) : (
                 <p style={{ color: '#8b949e' }}>
-                    No work experiences yet.&nbsp;
-                    <Link to="/owner/experience" style={{ color: '#58a6ff' }}>Add one now</Link>
+                    No experiences yet.{' '}
+                    <Link to="/owner/experience" style={{ color: '#58a6ff' }}>
+                        Add one now
+                    </Link>
+
                 </p>
             )}
+            <p style={{ color: '#8b949e' }}>
 
-            {/* Logout */}
+                <Link to="/owner/education">Education</Link>
+
+            </p>
+
+
+            {/* ─── Logout ──────────────────────────────────────────────── */}
             <button
                 onClick={handleLogout}
                 style={{
