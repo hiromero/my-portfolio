@@ -5,6 +5,34 @@
     min-height: 100vh;
     padding: 2rem;
 
+    &__btn {
+        background: none;
+        border: none;
+        color: #8b949e;
+        margin-left: 0.5rem;
+        cursor: pointer;
+        font-size: 0.9rem;
+
+        &--edit {
+
+            &:hover {
+                color: #58a6ff;
+            }
+        }
+
+        &--delete {
+            background-color: transparent;
+            color: #f85149;
+            border-color: #f85149;
+
+            &:hover {
+                background-color: #f85149;
+                color: #c9d1d9;
+            }
+        }
+    }
+
+
     &__container {
         max-width: 800px;
         margin: 0 auto;
@@ -43,9 +71,7 @@
             cursor: pointer;
             font-size: 0.9rem;
 
-            &:hover {
-                color: #58a6ff;
-            }
+
         }
     }
 

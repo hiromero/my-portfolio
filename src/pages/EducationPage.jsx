@@ -216,8 +216,18 @@ export default function EducationPage() {
                                 {entry.level} in {entry.description} @ {entry.school}
                             </strong>
                             <span>
-                                <button onClick={() => handleEdit(entry)}>Edit</button>
-                                <button onClick={() => handleDelete(entry.id)}>Delete</button>
+                                <button
+                                    className="education-page__btn education-page__btn--edit"
+                                    onClick={() => handleEdit(entry)}
+                                >
+                                    Edit
+                                </button>
+                                <button
+                                    className="education-page__btn education-page__btn--delete"
+                                    onClick={() => handleDelete(entry.id)}
+                                >
+                                    Delete
+                                </button>
                             </span>
                         </div>
 

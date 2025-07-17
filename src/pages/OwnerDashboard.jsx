@@ -6,28 +6,32 @@ import { Link, useNavigate } from 'react-router-dom';
 export default function OwnerDashboard() {
     const [details, setDetails] = useState(null);
     const [experiences, setExperiences] = useState([]);
+    const [education, setEducation] = useState([]);
     const token = localStorage.getItem('authToken');
     const navigate = useNavigate();
 
     useEffect(() => {
+        // Details
         axios.get('http://localhost:5000/api/details')
             .then(res => {
-                if (Object.keys(res.data).length > 0) {
-                    setDetails(res.data);
-                }
-            })
-            .catch(() => { });
+                if (Object.keys(res.data).length) setDetails(res.data);
+            });
 
+        // Experiences
         axios.get('http://localhost:5000/api/experience', {
             headers: { Authorization: `Bearer ${token}` }
         })
-            .then(res => setExperiences(res.data))
-            .catch(() => setExperiences([]));
+            .then(res => setExperiences(res.data));
+
+        // Education
+        axios.get('http://localhost:5000/api/education', {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+            .then(res => setEducation(res.data));
     }, [token]);
 
     const handleLogout = () => {
-        localStorage.removeItem('authToken');
-        localStorage.removeItem('user');
+        localStorage.clear();
         navigate('/login');
     };
 
@@ -42,7 +46,7 @@ export default function OwnerDashboard() {
                 Owner Dashboard
             </h1>
 
-            {/* ─── My Details Section ──────────────────────────────────── */}
+            {/* My Details */}
             <div style={{
                 display: 'flex',
                 justifyContent: 'space-between',
@@ -50,83 +54,37 @@ export default function OwnerDashboard() {
                 marginBottom: '0.5rem'
             }}>
                 <h2 style={{ margin: 0 }}>My Details</h2>
-                <Link
-                    to="/owner/details"
-                    style={{
-                        background: '#238636',
-                        color: 'white',
-                        padding: '0.5rem 1rem',
-                        borderRadius: '6px',
-                        textDecoration: 'none'
-                    }}
-                >
-                    Edit
-                </Link>
+                <Link to="/owner/details" style={editBtn}>Edit</Link>
             </div>
             {details ? (
-                <div style={{
-                    background: '#161b22',
-                    border: '1px solid #30363d',
-                    borderRadius: '6px',
-                    padding: '1.5rem',
-                    marginBottom: '2rem'
-                }}>
-                    <ul style={{ listStyle: 'none', padding: 0, lineHeight: 1.6, margin: 0 }}>
-                        {Object.entries(details).map(([key, val]) => (
-                            <li key={key}>
-                                <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
-                                {val || <em style={{ color: '#8b949e' }}>—</em>}
+                <section style={card}>
+                    <ul style={listStyle}>
+                        {Object.entries(details).map(([k, v]) => (
+                            <li key={k}>
+                                <strong>{capitalize(k)}:</strong> {v || <em style={subtle}>—</em>}
                             </li>
                         ))}
                     </ul>
-                </div>
+                </section>
             ) : (
-                <p style={{ color: '#8b949e', marginBottom: '2rem' }}>
-                    No details yet.{' '}
-                    <Link to="/owner/details" style={{ color: '#58a6ff' }}>
-                        Add now
-                    </Link>
+                <p style={subtle}>
+                    No details yet. <Link to="/owner/details" style={link}>Add now</Link>
                 </p>
             )}
 
-            {/* ─── Work Experiences Section ────────────────────────────── */}
-            <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                marginBottom: '0.5rem'
-            }}>
+            {/* Work Experiences */}
+            <div style={sectionHeader}>
                 <h2 style={{ margin: 0 }}>Work Experiences</h2>
-                <Link
-                    to="/owner/experience"
-                    style={{
-                        background: '#238636',
-                        color: 'white',
-                        padding: '0.5rem 1rem',
-                        borderRadius: '6px',
-                        textDecoration: 'none'
-                    }}
-                >
-                    Edit
-                </Link>
+                <Link to="/owner/experience" style={editBtn}>Edit</Link>
             </div>
-            {experiences.length > 0 ? (
+            {experiences.length ? (
                 experiences.map(exp => (
-                    <div
-                        key={exp.id}
-                        style={{
-                            background: '#161b22',
-                            border: '1px solid #30363d',
-                            borderRadius: '6px',
-                            padding: '1.5rem',
-                            marginBottom: '1rem'
-                        }}
-                    >
+                    <section key={exp.id} style={card}>
                         <strong style={{ fontSize: '1.1rem' }}>
                             {exp.role} @ {exp.company}
                         </strong>
-                        <p style={{ fontStyle: 'italic', margin: '.5rem 0' }}>
-                            {exp.startMonth} {exp.startYear} — {exp.current ? 'Present' : `${exp.endMonth} ${exp.endYear}`}
+                        <p style={italic}>
+                            {exp.startMonth} {exp.startYear} — {exp.current ? 'Present' : `${exp.endMonth} ${exp.endYear}`}
                         </p>
                         {exp.location && <p><em>{exp.location}</em></p>}
                         {exp.description && <p>{exp.description}</p>}
@@ -134,48 +92,101 @@ export default function OwnerDashboard() {
                             <ul style={{ paddingLeft: '1.25rem', marginTop: '.5rem' }}>
                                 {exp.achievements
                                     .split('\n')
-                                    .map((line, i) => line.trim())
-                                    .filter(line => line)
-                                    .map((line, i) => (
-                                        <li key={i} style={{ marginBottom: '.25rem' }}>
-                                            {line}
-                                        </li>
-                                    ))}
+                                    .map((l, i) => l.trim())
+                                    .filter(l => l)
+                                    .map((l, i) => <li key={i} style={{ marginBottom: '.25rem' }}>{l}</li>)
+                                }
                             </ul>
                         )}
-                    </div>
+                    </section>
                 ))
             ) : (
-                <p style={{ color: '#8b949e' }}>
-                    No experiences yet.{' '}
-                    <Link to="/owner/experience" style={{ color: '#58a6ff' }}>
-                        Add one now
-                    </Link>
-
+                <p style={subtle}>
+                    No experiences yet. <Link to="/owner/experience" style={link}>Add one now</Link>
                 </p>
             )}
-            <p style={{ color: '#8b949e' }}>
 
-                <Link to="/owner/education">Education</Link>
+            {/* Education */}
+            <div style={sectionHeader}>
+                <h2 style={{ margin: 0 }}>Education</h2>
+                <Link to="/owner/education" style={editBtn}>Edit</Link>
+            </div>
+            {education.length ? (
+                education.map(ed => (
+                    <section key={ed.id} style={card}>
+                        <strong style={{ fontSize: '1.1rem' }}>
+                            {ed.level} in {ed.description} @ {ed.school}
+                        </strong>
+                        <p style={italic}>
+                            {ed.startMonth} {ed.startYear} — {ed.graduationMonth} {ed.graduationYear}
+                        </p>
+                        {ed.location && <p><em>{ed.location}</em></p>}
+                        {ed.gpa && <p>GPA: {ed.gpa}{ed.maxGpa ? ` / ${ed.maxGpa}` : ''}</p>}
+                        {ed.activities && (
+                            <ul style={{ paddingLeft: '1.25rem', marginTop: '.5rem' }}>
+                                {ed.activities
+                                    .split('\n')
+                                    .map((l, i) => l.trim())
+                                    .filter(l => l)
+                                    .map((l, i) => <li key={i} style={{ marginBottom: '.25rem' }}>{l}</li>)
+                                }
+                            </ul>
+                        )}
+                    </section>
+                ))
+            ) : (
+                <p style={subtle}>
+                    No education entries yet. <Link to="/owner/education" style={link}>Add one now</Link>
+                </p>
+            )}
 
-            </p>
-
-
-            {/* ─── Logout ──────────────────────────────────────────────── */}
-            <button
-                onClick={handleLogout}
-                style={{
-                    marginTop: '2rem',
-                    background: '#78191f',
-                    color: '#ffdddd',
-                    border: 'none',
-                    padding: '0.5rem 1rem',
-                    borderRadius: '6px',
-                    cursor: 'pointer'
-                }}
-            >
+            {/* Logout */}
+            <button onClick={handleLogout} style={logoutBtn}>
                 Logout
             </button>
         </div>
     );
+}
+
+// ——— Styles & Helpers ——————————————————————————————————————————————————
+const card = {
+    background: '#161b22',
+    border: '1px solid #30363d',
+    borderRadius: '6px',
+    padding: '1.5rem',
+    marginBottom: '1rem'
+};
+
+const sectionHeader = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    margin: '2rem 0 0.5rem'
+};
+
+const editBtn = {
+    background: '#238636',
+    color: 'white',
+    padding: '0.5rem 1rem',
+    borderRadius: '6px',
+    textDecoration: 'none'
+};
+
+const logoutBtn = {
+    marginTop: '2rem',
+    background: '#78191f',
+    color: '#ffdddd',
+    border: 'none',
+    padding: '0.5rem 1rem',
+    borderRadius: '6px',
+    cursor: 'pointer'
+};
+
+const italic = { fontStyle: 'italic', margin: '.5rem 0' };
+const subtle = { color: '#8b949e' };
+const link = { color: '#58a6ff' };
+const listStyle = { listStyle: 'none', padding: 0, lineHeight: 1.6, margin: 0 };
+
+function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
 }

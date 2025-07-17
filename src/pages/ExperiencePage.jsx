@@ -228,8 +228,18 @@ export default function ExperiencePage() {
                     {list.map(exp => (
                         <li key={exp.id} className="experience-page__list-item">
                             <div className="experience-page__actions">
-                                <button onClick={() => handleEdit(exp)}>Edit</button>
-                                <button onClick={() => handleDelete(exp.id)}>Delete</button>
+                                <button
+                                    className="experience-page__btn experience-page__btn--edit"
+                                    onClick={() => handleEdit(exp)}
+                                >
+                                    Edit
+                                </button>
+                                <button
+                                    className="experience-page__btn experience-page__btn--delete"
+                                    onClick={() => handleDelete(exp.id)}
+                                >
+                                    Delete
+                                </button>
                             </div>
                             <h3>{exp.role} @ {exp.company}</h3>
                             <p>
