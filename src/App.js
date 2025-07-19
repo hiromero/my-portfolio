@@ -7,6 +7,7 @@ import ExperiencePage from './pages/ExperiencePage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import OwnerDashboard from './pages/OwnerDashboard';
+import SkillsPage from './pages/SkillsPage';
 
 function App() {
   return (
@@ -41,6 +42,14 @@ function App() {
           element={
             <ProtectedRoute>
               <EducationPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/owner/skills"
+          element={
+            <ProtectedRoute>
+              <SkillsPage />
             </ProtectedRoute>
           }
         />

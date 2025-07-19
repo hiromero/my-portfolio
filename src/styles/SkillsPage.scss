@@ -1,0 +1,125 @@
+.skills-page {
+    background: #0d1117;
+    color: #c9d1d9;
+    min-height: 100vh;
+    padding: 2rem;
+
+    &__container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    &__heading {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+    }
+
+    &__form {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        background: #161b22;
+        border: 1px solid #30363d;
+        border-radius: 6px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+
+        &-field {
+            flex: 1 1 200px;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 0.75rem;
+
+            label {
+                color: #8b949e;
+                margin-bottom: 0.25rem;
+                font-size: 0.875rem;
+            }
+
+            input {
+                background: #0d1117;
+                border: 1px solid #30363d;
+                border-radius: 4px;
+                padding: 0.5rem;
+                color: #c9d1d9;
+            }
+        }
+
+        button {
+            align-self: flex-end;
+            background: #238636;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.2s;
+
+            &:hover {
+                background: #2ea043;
+            }
+        }
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 1.5rem;
+    }
+
+    &__card {
+        background: #161b22;
+        border: 1px solid #30363d;
+        border-radius: 6px;
+        padding: 1rem;
+        text-align: center;
+        position: relative;
+
+        svg,
+        img {
+            width: 2rem;
+            height: 2rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.75;
+        }
+
+        p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #c9d1d9;
+        }
+
+        .skills-page__btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            font-size: 0.75rem;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            padding: 0.2rem 0.4rem;
+            cursor: pointer;
+
+            &--edit {
+                background: #238636;
+                color: white;
+                border-color: #238636;
+                margin-right: 0.3rem;
+
+                &:hover {
+                    background: #2ea043;
+                }
+            }
+
+            &--delete {
+                background: transparent;
+                color: #f85149;
+                border-color: #f85149;
+
+                &:hover {
+                    background: rgba(248, 81, 73, 0.1);
+                }
+            }
+        }
+    }
+}
