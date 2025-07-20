@@ -1,20 +1,29 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { FaCat, FaCss3Alt, FaHtml5, FaJsSquare, FaNodeJs, FaPython } from 'react-icons/fa';
-import { SiMariadb, SiMysql, SiSqlite } from 'react-icons/si';
+import { FaCat, FaCss3Alt, FaHtml5, FaJsSquare, FaLaravel, FaNodeJs, FaPython, FaReact } from 'react-icons/fa';
+import { SiAdobephotoshop, SiAdobepremierepro, SiCplusplus, SiFrappe, SiMariadb, SiMysql, SiPhp, SiSass, SiSqlite, SiTypescript } from 'react-icons/si';
 import '../styles/SkillsPage.scss';
 
 // map known names to icon components
 const ICONS = {
     Cat: FaCat,
+    React: FaReact,
+    Laravel: FaLaravel,
+    Frappe: SiFrappe,
+    'Node.js': FaNodeJs,
+    Sass: SiSass,
     Python: FaPython,
+    JavaScript: FaJsSquare,
+    PHP: SiPhp,
+    Typescript: SiTypescript,
+    'C++': SiCplusplus,
     HTML: FaHtml5,
     CSS: FaCss3Alt,
-    JavaScript: FaJsSquare,
-    'Node.js': FaNodeJs,
     MariaDB: SiMariadb,
     MySQL: SiMysql,
     SQLite: SiSqlite,
+    'Adobe Photoshop': SiAdobephotoshop,
+    'Adobe Premier Pro': SiAdobepremierepro,
     // …add more mappings or allow a URL field
 };
 

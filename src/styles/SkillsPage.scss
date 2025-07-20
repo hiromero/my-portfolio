@@ -64,7 +64,7 @@
 
     &__grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(150px, 2fr));
         gap: 1.5rem;
     }
 
@@ -93,18 +93,17 @@
         .skills-page__btn {
             position: absolute;
             top: 0.5rem;
-            right: 0.5rem;
             font-size: 0.75rem;
-            border: 1px solid transparent;
             border-radius: 4px;
             padding: 0.2rem 0.4rem;
             cursor: pointer;
 
             &--edit {
+                right: 0.5rem; // edit sits 0.5rem from the right
                 background: #238636;
                 color: white;
-                border-color: #238636;
-                margin-right: 0.3rem;
+                border: 1px solid #238636;
+                transition: background 0.2s;
 
                 &:hover {
                     background: #2ea043;
@@ -112,9 +111,11 @@
             }
 
             &--delete {
+                right: 2.5rem; // delete now sits further left
                 background: transparent;
                 color: #f85149;
-                border-color: #f85149;
+                border: 1px solid #f85149;
+                transition: background 0.2s;
 
                 &:hover {
                     background: rgba(248, 81, 73, 0.1);

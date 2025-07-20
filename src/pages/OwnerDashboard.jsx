@@ -139,6 +139,8 @@ export default function OwnerDashboard() {
                     No education entries yet. <Link to="/owner/education" style={link}>Add one now</Link>
                 </p>
             )}
+
+
             <Link to="/owner/skills" style={editBtn}>Edit</Link>
 
             {/* Logout */}
