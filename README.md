@@ -1,32 +1,78 @@
 # My Portfolio
 
-This portfolio showcases my web development projects.
+> A full‑stack portfolio website built with React (frontend) and Node.js/Express (backend).  
+> Allows the owner to log in and **Create • Read • Update • Delete** their personal details, work experiences, education, skills, achievements, and certifications.
 
-## About Me
+![Dashboard Preview](./public/dashboard-screenshot.png)
 
-I'm a passionate web developer with experience in building responsive websites.
+## Table of Contents
 
-## Projects
+- [Demo](#demo)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+    - [Backend](#backend)
+    - [Frontend](#frontend)
+- [Project Structure](#project-structure)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-### Project Name 1
+---
 
-- Description: [Describe the project]
-- Live Site: [Link]
-- GitHub: [Link]
-- Screenshot: [Link to image]
+## Demo
 
-### Project Name 2
+Live demo (if hosted): https://hiromero.github.io/  
+![Portfolio Home](./public/home-screenshot.png)
 
-- Description: [Describe the project]
-- Live Site: [Link]
-- GitHub: [Link]
-- Screenshot: [Link to image]
+---
 
-## Skills
+## Features
 
-- HTML, CSS, JavaScript, React, Node.js
+- **Authentication**: JWT‑based login for portfolio owner
+- **Owner Dashboard**
+  - **Personal Details** (name, email, phone, bio, etc.)
+  - **Work Experience** (list, add, edit, delete; auto‑sorted newest→oldest)
+  - **Education** (list, add, edit, delete; auto‑sorted by graduation date)
+  - **Skills** (icon‑grid with CRUD, powered by react‑icons)
+- **Public View**: Guest users can browse without logging in
+- **Dark‑mode UI**: GitHub‑inspired styling via SCSS
 
-## Contact
+---
 
-- Email: your.email@example.com
-- LinkedIn: [Link]
+## Tech Stack
+
+- **Frontend**
+  - React v18, React Router v6
+  - SCSS for styling (BEM methodology)
+  - Axios for HTTP requests
+  - react‑icons for skill icons
+- **Backend**
+  - Node.js, Express.js
+  - JSON files as simple “databases” (data stored under `backend/data/`)
+  - JWT for authentication
+- **Dev Tools**
+  - [concurrently](https://www.npmjs.com/package/concurrently) (optional)
+  - nodemon (for auto‑reload during development)
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) v16+
+- npm (comes with Node.js)
+- Git
+
+### Installation
+
+Clone the repo:
+
+```bash
+git clone https://github.com/hiromero/my-portfolio.git
+cd my-portfolio
+```
