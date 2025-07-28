@@ -1,14 +1,40 @@
 // src/pages/OwnerDashboard.jsx
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { FaCat, FaCss3Alt, FaHtml5, FaJsSquare, FaLaravel, FaNodeJs, FaPython, FaReact } from 'react-icons/fa';
+import { SiAdobephotoshop, SiAdobepremierepro, SiCplusplus, SiFrappe, SiMariadb, SiMysql, SiPhp, SiSass, SiSqlite, SiTypescript } from 'react-icons/si';
 import { Link, useNavigate } from 'react-router-dom';
+
+const ICONS = {
+    Cat: FaCat,
+    React: FaReact,
+    Laravel: FaLaravel,
+    Frappe: SiFrappe,
+    'Node.js': FaNodeJs,
+    Sass: SiSass,
+    Python: FaPython,
+    JavaScript: FaJsSquare,
+    PHP: SiPhp,
+    Typescript: SiTypescript,
+    'C++': SiCplusplus,
+    HTML: FaHtml5,
+    CSS: FaCss3Alt,
+    MariaDB: SiMariadb,
+    MySQL: SiMysql,
+    SQLite: SiSqlite,
+    'Adobe Photoshop': SiAdobephotoshop,
+    'Adobe Premier Pro': SiAdobepremierepro,
+    // …add more mappings or allow a URL field
+};
 
 export default function OwnerDashboard() {
     const [details, setDetails] = useState(null);
     const [experiences, setExperiences] = useState([]);
     const [education, setEducation] = useState([]);
+    const [skills, setSkills] = useState([]);
     const token = localStorage.getItem('authToken');
     const navigate = useNavigate();
+
 
     useEffect(() => {
         // Details
@@ -28,6 +54,14 @@ export default function OwnerDashboard() {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then(res => setEducation(res.data));
+
+        //Skills
+        axios.get('http://localhost:5000/api/skills', {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+            .then(res => setSkills(res.data))
+            .catch(() => setSkills([]));
+
     }, [token]);
 
     const handleLogout = () => {
@@ -141,7 +175,36 @@ export default function OwnerDashboard() {
             )}
 
 
-            <Link to="/owner/skills" style={editBtn}>Edit</Link>
+            {/*  Skills  */}
+            <div style={sectionHeader}>
+                <h2 style={{ margin: 0 }}>Skills</h2>
+                <Link to="/owner/skills" style={editBtn}>Edit</Link>
+            </div>
+
+            {skills.length > 0 ? (
+                <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fill,minmax(100px,1fr))',
+                    gap: '1.5rem',
+                    textAlign: 'center'
+                }}>
+                    {skills.map(skill => (
+                        <div key={skill.id} style={card}>
+                            {(() => {
+                                const Icon = ICONS[skill.name] || (() => <span>❔</span>);
+                                return <Icon style={{ width: '2rem', height: '2rem', marginBottom: '.5rem', opacity: .75 }} />;
+                            })()}
+                            <p style={{ margin: 0, fontSize: '0.9rem', color: '#c9d1d9' }}>
+                                {skill.name}
+                            </p>
+                        </div>
+                    ))}
+                </div>
+            ) : (
+                <p style={subtle}>
+                    No skills yet. <Link to="/owner/skills" style={link}>Add some now</Link>
+                </p>
+            )}
 
             {/* Logout */}
             <button onClick={handleLogout} style={logoutBtn}>
@@ -152,6 +215,8 @@ export default function OwnerDashboard() {
 }
 
 // ——— Styles & Helpers ——————————————————————————————————————————————————
+
+
 const card = {
     background: '#161b22',
     border: '1px solid #30363d',
@@ -184,6 +249,8 @@ const logoutBtn = {
     borderRadius: '6px',
     cursor: 'pointer'
 };
+
+
 
 const italic = { fontStyle: 'italic', margin: '.5rem 0' };
 const subtle = { color: '#8b949e' };
